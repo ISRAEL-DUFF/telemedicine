@@ -65,14 +65,14 @@ if(isset($_POST['delete_id'])){
                             $agora_channel = $row['agora_channel'];
                             $agora_token = $row['agora_token'];
                             $appID = "7d0e17b354854bf18e63ae6204e0f395";
-                            $uid = 2882341273;
+                            // $uid = 2882341273;
 
 							echo "<tr><td >" . $row['id'] . "</td>
 							<td>" . $row['patient'] . "</td><td>" . $row['contact'] . "</td><td >" . $row['problem'] . "</td>
 							<td >" . $row['user'] . "</td>
 							<td><div class='field-actions'>
                             <div class='btn-group btn-primary' style='padding: 5px'>
-                                <a href='../agora/?appid=$appID&channel=$agora_channel&token=$agora_token&uid=$uid'>Video Chat</a>
+                                <a href='../agora/?appid=$appID&channel=$agora_channel&token=$agora_token&uid=$id'>Video Chat</a>
                             </div>
                             <div class='btn-group'>
 							<form action='booking.php' method='post'>

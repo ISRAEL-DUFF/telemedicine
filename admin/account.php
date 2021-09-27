@@ -110,9 +110,9 @@ if(isset($_POST['SubmitButton'])){ //check if form was submitted
 				</div>			  			  
 				<div class="col-lg-6">
 					<div class="bac-right-login">
-						<h4>I'm new in MedEase</h4>
+						<h4>I'm new in TeleMed</h4>
 						<h5>Sign up for a account to book an appointment right now!</h5>
-						<a href = "presignup.php">I'm new in MedEase</a>
+						<a href = "presignup.php">I'm new in TeleMed</a>
 					</div>
 				</div>
 			</div>

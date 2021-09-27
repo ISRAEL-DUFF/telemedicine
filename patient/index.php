@@ -4,6 +4,10 @@ if(!isset($_SESSION['user'])){
 header("location:../index.php");
 }
 $id=$_SESSION['user'];
+
+$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM doctors WHERE email = '$id'"));
+$uid= $getID['id'];
+
 include("header.php");
 // $conn = new mysqli("localhost", "root", "", "medease");
 include_once '../database.php';
@@ -67,7 +71,7 @@ if(isset($_POST['delete_id'])){
                             $agora_channel = $row['agora_channel'];
                             $agora_token = $row['agora_token'];
                             $appID = "7d0e17b354854bf18e63ae6204e0f395";
-                            $uid = 2882341273;
+                            // $uid = 2882341273;
 
 							echo "<tr><td >" . $row['id'] . "</td><td >" . $row['doctor'] . "</td>
 							<td>" . $row['patient'] . "</td><td>" . $row['contact'] . "</td><td >" . $row['problem'] . "</td>

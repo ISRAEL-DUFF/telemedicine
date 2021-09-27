@@ -3,6 +3,11 @@
 if(!isset($_SESSION['user'])){
 header("location:../index.php");
 }
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include("header.php");
 // $conn = new mysqli("localhost", "root", "", "medease");
 include_once '../database.php';
@@ -16,11 +21,14 @@ $name = $_POST['pname'];
 $email = $_SESSION['user'];
 $phone = $_POST['phone'];
 $problem = $_POST['problem'];
-$doctor = $_POST['doctor'];	
+$doctor = $_POST['doctor'];
+
+$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM doctors WHERE email = '$email'"));
+$user_id= $getID['id'];
 
 // generate token
 $channel_name = "v".time()."d";
-$agora_token = generate_token($channel_name);
+$agora_token = generate_token($channel_name, $user_id);
 $sql = "INSERT INTO bookings (doctor, patient, contact, problem, user, agora_channel, agora_token) VALUES ('$doctor', '$name', '$phone', '$problem','$email','$channel_name','$agora_token')";
 mysqli_query($conn, $sql);
 echo '<script>window.location.href="index.php";</script>';
