@@ -6,6 +6,7 @@ header("location:../index.php");
 include("header.php");
 // $conn = new mysqli("localhost", "root", "", "medease");
 include_once '../database.php';
+include_once '../agora/RtcTokenBuilderSample.php';
 
 $query = "SELECT * FROM doctors"; 
 $result = mysqli_query($conn,$query);	
@@ -16,7 +17,11 @@ $email = $_SESSION['user'];
 $phone = $_POST['phone'];
 $problem = $_POST['problem'];
 $doctor = $_POST['doctor'];	
-$sql = "INSERT INTO bookings (doctor, patient, contact, problem, user) VALUES ('$doctor', '$name', '$phone', '$problem','$email')";
+
+// generate token
+$channel_name = "v".time()."d";
+$agora_token = generate_token($channel_name);
+$sql = "INSERT INTO bookings (doctor, patient, contact, problem, user, agora_channel, agora_token) VALUES ('$doctor', '$name', '$phone', '$problem','$email','$channel_name','$agora_token')";
 mysqli_query($conn, $sql);
 echo '<script>window.location.href="index.php";</script>';
 }

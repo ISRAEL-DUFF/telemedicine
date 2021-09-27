@@ -63,10 +63,10 @@ $("#join-form").submit(async function (e) {
   e.preventDefault();
   $("#join").attr("disabled", true);
   try {
-    options.appid = $("#appid").val();
-    options.token = $("#token").val();
-    options.channel = $("#channel").val();
-    options.uid = Number($("#uid").val());
+    // options.appid = $("#appid").val();
+    // options.token = $("#token").val();
+    // options.channel = $("#channel").val();
+    // options.uid = Number($("#uid").val());
     await join();
     if(options.token) {
       $("#success-alert-with-token").css("display", "block");
