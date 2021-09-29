@@ -23,14 +23,17 @@ $phone = $_POST['phone'];
 $problem = $_POST['problem'];
 $doctor = $_POST['doctor'];
 
-$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM doctors WHERE email = '$email'"));
+$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM patients WHERE email = '$email'"));
 $user_id= $getID['id'];
 
 // generate token
 $channel_name = "v".time()."d";
 $agora_token = generate_token($channel_name, $user_id);
+
 $sql = "INSERT INTO bookings (doctor, patient, contact, problem, user, agora_channel, agora_token) VALUES ('$doctor', '$name', '$phone', '$problem','$email','$channel_name','$agora_token')";
 mysqli_query($conn, $sql);
+
+die(print_r($_POST));
 echo '<script>window.location.href="index.php";</script>';
 }
 

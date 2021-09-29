@@ -3,18 +3,22 @@
 if(!isset($_SESSION['user'])){
 header("location:../index.php");
 }
-$id=$_SESSION['user'];
 
-$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM doctors WHERE email = '$id'"));
-$uid= $getID['id'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$id=$_SESSION['user'];
 
 include("header.php");
 // $conn = new mysqli("localhost", "root", "", "medease");
 include_once '../database.php';
 
-$query = "SELECT * FROM bookings Where user='$id'"; 
-$result = mysqli_query($conn,$query);	
+$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM patients WHERE email = '$id'"));
+$uid= $getID['id'];
 
+$query = "SELECT * FROM bookings Where user='$id'"; 
+$result = mysqli_query($conn,$query);
 
 if(isset($_POST['delete_id'])){ 
 		$id = $_POST['delete_id'];
