@@ -16,9 +16,11 @@ function generate_token($channelName, $uid) {
     $expireTimeInSeconds = 86400;
     $currentTimestamp = (new DateTime("now", new DateTimeZone('UTC')))->getTimestamp();
     $privilegeExpiredTs = $currentTimestamp + $expireTimeInSeconds;
-    $token = RtcTokenBuilder::buildTokenWithUid($appID, $appCertificate, $channelName, $uid, $role, $privilegeExpiredTs);
+
+    // note: uid has been set to zero in order to allow any user connect
+    $token = RtcTokenBuilder::buildTokenWithUid($appID, $appCertificate, $channelName, 0, $role, $privilegeExpiredTs);
     return $token;
-}
+} 
 
 // $token = RtcTokenBuilder::buildTokenWithUid($appID, $appCertificate, $channelName, $uid, $role, $privilegeExpiredTs);
 // echo 'Token with int uid: ' . $token . PHP_EOL;
