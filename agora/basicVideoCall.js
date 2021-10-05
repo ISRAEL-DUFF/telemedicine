@@ -44,7 +44,13 @@ $(() => {
   options.appid = urlParams.get("appid");
   options.channel = urlParams.get("channel");
   options.token = urlParams.get("token");
-  options.uid = urlParams.get("uid");
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+  
+  options.uid = Number(urlParams.get("uid")) + getRandomInt(200);
+
   if (options.appid && options.channel) {
     $("#uid").val(options.uid);
     $("#appid").val(options.appid);
@@ -71,7 +77,7 @@ $("#join-form").submit(async function (e) {
     if(options.token) {
       $("#success-alert-with-token").css("display", "block");
     } else {
-      $("#success-alert a").attr("href", `index.html?appid=${options.appid}&channel=${options.channel}&token=${options.token}`);
+      $("#success-alert a").attr("href", `index.html?appid=${options.appid}&channel=${options.channel}&token=${options.token}&uid=${options.uid}`);
       $("#success-alert").css("display", "block");
     }
   } catch (error) {
