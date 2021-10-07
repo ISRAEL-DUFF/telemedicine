@@ -8,9 +8,9 @@
         <div class="container">
             <div class="col-lg-12">
                 <div class="banner-text animated fadeInLeft">
-                    <h4>EKENG-ITA OFFIONG EKENG's</h4>
+                    <h4 style='color:white'>EKENG-ITA OFFIONG EKENG's</h4>
                     <h2>Telemedicine App</h2>
-                    <p>
+                    <p style='color:white'>
                     A TELECONSULTATION APPLICATION FOR SUPPORTING DOCTOR-PATIENT COMMUNICATION
                     </p>
                     

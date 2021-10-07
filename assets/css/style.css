@@ -108,7 +108,7 @@ a {
 }
 
 .banner {
-    background-image: url(../images/home/1.jpg);
+    background-image: url(../images/home/1.jpeg);
     height: 902px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -728,7 +728,7 @@ color: #f0f0f0;
 }
 
 .contact-banner {
-    background-image: url(../images/contact/1.jpg);
+    background-image: url(../images/contact/1.jpeg);
     min-height: 850px;
     background-repeat: no-repeat;
     background-size: cover;
