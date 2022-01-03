@@ -85,6 +85,11 @@
                     <li  >
                         <a  href="setting.php"><i class="fa fa-gear fa-2x"></i> Settings </a>
                     </li>	
+
+
+                    <li  >
+                        <a  href="admin_index.php"><i class="fa fa-user fa-2x"></i> Admin Page </a>
+                    </li>	
 										
 					
                 </ul>
