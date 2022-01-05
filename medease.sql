@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 31, 2019 at 01:56 AM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Host: localhost:3306
+-- Generation Time: Jan 05, 2022 at 07:03 PM
+-- Server version: 8.0.26-0ubuntu0.20.04.2
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,22 +29,26 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bookings` (
-  `id` int(20) NOT NULL,
+  `id` int NOT NULL,
   `doctor` varchar(30) NOT NULL,
   `patient` varchar(30) NOT NULL,
   `contact` varchar(15) NOT NULL,
   `problem` varchar(50) NOT NULL,
-  `user` varchar(30) NOT NULL
+  `user` varchar(30) NOT NULL,
+  `agora_token` varchar(256) DEFAULT NULL,
+  `agora_channel` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`id`, `doctor`, `patient`, `contact`, `problem`, `user`) VALUES
-(9, '1', 'Ali Abbas', '03583458306', 'high blood pressuer', 'abc@gmail.com'),
-(10, '1', 'Haider Ali', '0345252857', 'Aids', 'abc@gmail.com'),
-(11, '1', 'jagd uqwgc', 'jwe fkhqjkef', 'djsbf kwf', 'abc@abc.com');
+INSERT INTO `bookings` (`id`, `doctor`, `patient`, `contact`, `problem`, `user`, `agora_token`, `agora_channel`) VALUES
+(23, '1', 'Patient 60', '09012345678', 'A new problem', 'abc@abc.com', '0067d0e17b354854bf18e63ae6204e0f395IABrx3fUXxLYMeMzF8twMg5ynMqv40PYblzCMlrjrGXbHq7Szxy379yDIgB2QgEAFAVWYQQAAQAUBVZhAwAUBVZhAgAUBVZhBAAUBVZh', 'v1632940948d'),
+(24, '1', 'Helen Backeen', '09023456789', 'ddddd', 'abc@abc.com', '0067d0e17b354854bf18e63ae6204e0f395IACkXHmpzjfj6eIkCJUwMt5peRcdcZAvcf8ApWjow5HoK0kK/Mq379yDIgAKvgAAqAVWYQQAAQCoBVZhAwCoBVZhAgCoBVZhBACoBVZh', 'v1632941096d'),
+(25, '1', 'John Doe', '09012345678', 'Keyword for disease', 'abc@abc.com', '0067d0e17b354854bf18e63ae6204e0f395IADWN664UOWCdnYjzu3JLzuQvG9vzA7PvhHel+DCWNFRRQTKEp6379yDIgAfTgEApwZWYQQAAQCnBlZhAwCnBlZhAgCnBlZhBACnBlZh', 'v1632941351d'),
+(26, '1', 'aaa', '09023456789', 'Just a test appointment', 'abc@abc.com', '0067d0e17b354854bf18e63ae6204e0f395IADKaJh9LZ94i6J0/sXc1rigOXoAfvoTJaIaJQKRnl3UFP/6P2m379yDIgB6SQEAigdWYQQAAQCKB1ZhAwCKB1ZhAgCKB1ZhBACKB1Zh', 'v1632941578d'),
+(27, '1', 'Patient 61', '07089445134', 'ddddd', 'abc@abc.com', '0067d0e17b354854bf18e63ae6204e0f395IAB8RuRPpkD4hW8KWAPj5X6vD70rx2wgVeGlcVWw3gsT5dKOU3C379yDIgBC6QAAHQhWYQQAAQAdCFZhAwAdCFZhAgAdCFZhBAAdCFZh', 'v1632941725d');
 
 -- --------------------------------------------------------
 
@@ -53,7 +57,7 @@ INSERT INTO `bookings` (`id`, `doctor`, `patient`, `contact`, `problem`, `user`)
 --
 
 CREATE TABLE `comments` (
-  `id` int(10) NOT NULL,
+  `id` int NOT NULL,
   `fid` varchar(10) NOT NULL,
   `uid` varchar(30) NOT NULL,
   `comment` varchar(100) NOT NULL
@@ -75,7 +79,8 @@ INSERT INTO `comments` (`id`, `fid`, `uid`, `comment`) VALUES
 (10, '10', 'abc@abc.com', 'fq kfqgf qgfl  qf'),
 (11, '11', 'abc@abc.com', 'h dflqhdlqhld'),
 (12, '7', 'abc@abc.com', 'shdfjshs'),
-(13, '7', 'abc@abc.com', 'efiwg');
+(13, '7', 'abc@abc.com', 'efiwg'),
+(14, '8', 'abc@gmail.com', 'I add another comment here to signify presence.');
 
 -- --------------------------------------------------------
 
@@ -84,7 +89,7 @@ INSERT INTO `comments` (`id`, `fid`, `uid`, `comment`) VALUES
 --
 
 CREATE TABLE `doctors` (
-  `id` int(30) NOT NULL,
+  `id` int NOT NULL,
   `email` varchar(30) NOT NULL,
   `pass` varchar(30) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -95,15 +100,17 @@ CREATE TABLE `doctors` (
   `special` varchar(30) NOT NULL,
   `description` varchar(300) NOT NULL,
   `city` varchar(30) NOT NULL,
-  `sex` varchar(10) NOT NULL
+  `sex` varchar(10) NOT NULL,
+  `doctor_type` varchar(10) NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `doctors`
 --
 
-INSERT INTO `doctors` (`id`, `email`, `pass`, `name`, `address`, `contact`, `fees`, `time`, `special`, `description`, `city`, `sex`) VALUES
-(1, 'abc@gmail.com', '12345678', 'jkdhkwd', 'House # gcuibv e huww  uiwh ', '0345252857', 'Rs. 500', '10 AM to 5 PM', '1,', 'J wjrlwjefk wekhewighe ighuiwhuiw3', '1', 'Male');
+INSERT INTO `doctors` (`id`, `email`, `pass`, `name`, `address`, `contact`, `fees`, `time`, `special`, `description`, `city`, `sex`, `doctor_type`) VALUES
+(1, 'abc@gmail.com', '12345678', 'Dr. John umoren', 'House # gcuibv e huww  uiwh ', '0345252857', 'Rs. 500', '10 AM to 5 PM', '1,', 'J wjrlwjefk wekhewighe ighuiwhuiw3', '1', 'Male', 'admin'),
+(2, 'doctor1@gmail.com', 'password1', 'Dr. John Njoku', '#434 A city on the high mountain', '08179842529', 'Rs. 1500', '10 AM to 5 PM', 'General Medicine,', 'This is a test doctor here.', 'Bahawalnagar', 'Male', 'user');
 
 -- --------------------------------------------------------
 
@@ -112,7 +119,7 @@ INSERT INTO `doctors` (`id`, `email`, `pass`, `name`, `address`, `contact`, `fee
 --
 
 CREATE TABLE `forum` (
-  `id` int(10) NOT NULL,
+  `id` int NOT NULL,
   `uid` varchar(30) NOT NULL,
   `topic` varchar(100) NOT NULL,
   `discussion` varchar(500) NOT NULL
@@ -136,7 +143,7 @@ INSERT INTO `forum` (`id`, `uid`, `topic`, `discussion`) VALUES
 --
 
 CREATE TABLE `patients` (
-  `id` int(10) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(30) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `email` varchar(30) NOT NULL,
@@ -193,31 +200,31 @@ ALTER TABLE `patients`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `forum`
 --
 ALTER TABLE `forum`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

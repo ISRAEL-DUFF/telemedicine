@@ -14,8 +14,9 @@ include("header.php");
 // $conn = new mysqli("localhost", "root", "", "medease");
 include_once '../database.php';
 
-$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM patients WHERE email = '$id'"));
+$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM patients WHERE email = '$id'"));
 $uid= $getID['id'];
+$patientName=$getID['name'];
 
 $query = "SELECT * FROM bookings Where user='$id'"; 
 $result = mysqli_query($conn,$query);
@@ -77,19 +78,22 @@ if(isset($_POST['delete_id'])){
                             $appID = "7d0e17b354854bf18e63ae6204e0f395";
                             // $uid = 2882341273;
 
+                            $chatServer = $chat_server_host . "/chat.html?room=". $row['id']. "&name=$patientName";
+                            $chatLink = "<div class='btn-group btn-primary' style='padding: 5px'><a href='". $chatServer. "'>Chat</a></div>";
+
 							echo "<tr><td >" . $row['id'] . "</td><td >" . $row['doctor'] . "</td>
 							<td>" . $row['patient'] . "</td><td>" . $row['contact'] . "</td><td >" . $row['problem'] . "</td>
 							<td >" . $row['user'] . "</td>
 							<td><div class='field-actions'>
                             <div class='btn-group btn-primary' style='padding: 5px'>
-                                <a href='../agora/?appid=$appID&channel=$agora_channel&token=$agora_token&uid=$uid'>Video Chat</a>
+                                <a href='../agora/?appid=$appID&channel=$agora_channel&token=$agora_token&uid=$uid'>Video Call</a>
                             </div>
+                            $chatLink
                             <div class='btn-group'>
                                 <form action='index.php' method='post'>
                                 <button   name='delete_id' style='background-color:#a01f62;color:white;'  value='" . $row['id'] . "'   type='submit'>Delete</button>
                                 </from>
                             </div>
-                            
                             </div></td></tr>"; 
 						}
 				?>

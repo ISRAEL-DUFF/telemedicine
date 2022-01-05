@@ -8,8 +8,10 @@ include("header.php");
 include_once '../database.php';
 
 $uid=$_SESSION['user'];
-$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT id FROM doctors WHERE email = '$uid'"));
+$getID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM doctors WHERE email = '$uid'"));
 $id= $getID['id'];
+$doctorName = $getID['name'];
+
 $query = "SELECT * FROM bookings WHERE doctor='$id'"; 
 $result = mysqli_query($conn,$query);
 
@@ -65,6 +67,9 @@ if(isset($_POST['delete_id'])){
                             $agora_channel = $row['agora_channel'];
                             $agora_token = $row['agora_token'];
                             $appID = "7d0e17b354854bf18e63ae6204e0f395";
+                            $chatServer = $chat_server_host . "/chat.html?room=". $row['id']. "&name=$doctorName";
+
+                            $chatLink = "<div class='btn-group btn-primary' style='padding: 5px'><a href='". $chatServer. "'>Chat</a></div>";
                             // $uid = 2882341273;
 
 							echo "<tr><td >" . $row['id'] . "</td>
@@ -72,8 +77,9 @@ if(isset($_POST['delete_id'])){
 							<td >" . $row['user'] . "</td>
 							<td><div class='field-actions'>
                             <div class='btn-group btn-primary' style='padding: 5px'>
-                                <a href='../agora/?appid=$appID&channel=$agora_channel&token=$agora_token&uid=$id'>Video Chat</a>
+                                <a href='../agora/?appid=$appID&channel=$agora_channel&token=$agora_token&uid=$id'>Video Call</a>
                             </div>
+                            $chatLink
                             <div class='btn-group'>
 							<form action='booking.php' method='post'>
 							  <button   name='delete_id' style='background-color:#a01f62;color:white;'  value='" . $row['id'] . "'   type='submit'>Delete</button>

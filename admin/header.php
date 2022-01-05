@@ -1,3 +1,4 @@
+<?php  session_start(); ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -86,10 +87,13 @@
                         <a  href="setting.php"><i class="fa fa-gear fa-2x"></i> Settings </a>
                     </li>	
 
-
-                    <li  >
-                        <a  href="admin_index.php"><i class="fa fa-user fa-2x"></i> Admin Page </a>
-                    </li>	
+                    <?php 
+                        if($_SESSION['doctor_type'] == 'admin') {
+                            echo '<li  >
+                            <a  href="admin_index.php"><i class="fa fa-user fa-2x"></i> Admin Page </a>
+                        </li>	';
+                        }
+                    ?>
 										
 					
                 </ul>
