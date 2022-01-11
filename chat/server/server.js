@@ -1,7 +1,8 @@
+const fs = require('fs')
 const path = require('path');
 const http = require('http');
 const express = require('express');
-const socketIO = require('socket.io');
+// const socketIO = require('socket.io');
 const SocketIOFile = require('socket.io-file');
 
 const {generateMessage, generateLocationMessage,generateFiles} = require('./utils/message');
@@ -10,9 +11,37 @@ const {Users} = require('./utils/users');
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
+
 const app = express();
-const server = http.createServer(app);
-const io = socketIO(server);
+// const server = http.createServer(app);
+// const io = socketIO(server);
+
+let ssl = false;
+
+
+let server
+if (!ssl) server = require('http').Server(app)
+else {
+    const privateKey = fs.readFileSync('/etc/letsencrypt/live/p2pchain.org/privkey.pem', 'utf8')
+    const certificate = fs.readFileSync('/etc/letsencrypt/live/p2pchain.org/cert.pem', 'utf8')
+    const ca = fs.readFileSync('/etc/letsencrypt/live/p2pchain.org/chain.pem', 'utf8')
+
+  // console.log(ca);
+
+  const sslOptions = {
+    cert: certificate,
+    ca: ca,
+    key: privateKey
+  }
+
+  server = require('https').Server(sslOptions, app)
+}
+
+const { Server } = require('socket.io')
+io = new Server(server, {cors:{origin: '*'}})
+
+
+
 const users = new Users();
 
 app.use(express.static(publicPath));

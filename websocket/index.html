@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>1to1Fx websocket</title>
+
+        <script src='./websocket.js'></script>
+    </head>
+
+    <body>
+        <p>Socket testing</p>
+        <script>
+            var sock = new SocketService();
+            sock.connect('124344webae');
+            sock.sendMessage({
+                content: 'Hello Server'
+            })
+        </script>
+    </body>
+</html>
