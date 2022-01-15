@@ -7,7 +7,7 @@ include("find.php");
 	<div class="row">
 		<div class="col-lg-7">
 		<div class="join-now-doc" >
-				<h3 style="text-align:center;"><?php  if(isset($_SESSION['success'])){ echo "Successfully registered!";};session_unset();?></h3>
+				<h3 style="text-align:center;"><?php  if(isset($_SESSION['success'])){ echo "Successfully registered ".$_SESSION['regName'];};session_unset();?></h3>
 			</div>
 
 			<div class="join-now-doc">

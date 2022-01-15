@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 05, 2022 at 07:03 PM
+-- Generation Time: Jan 15, 2022 at 05:31 PM
 -- Server version: 8.0.26-0ubuntu0.20.04.2
 -- PHP Version: 7.4.3
 
@@ -109,8 +109,9 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `email`, `pass`, `name`, `address`, `contact`, `fees`, `time`, `special`, `description`, `city`, `sex`, `doctor_type`) VALUES
-(1, 'abc@gmail.com', '12345678', 'Dr. John umoren', 'House # gcuibv e huww  uiwh ', '0345252857', 'Rs. 500', '10 AM to 5 PM', '1,', 'J wjrlwjefk wekhewighe ighuiwhuiw3', '1', 'Male', 'admin'),
-(2, 'doctor1@gmail.com', 'password1', 'Dr. John Njoku', '#434 A city on the high mountain', '08179842529', 'Rs. 1500', '10 AM to 5 PM', 'General Medicine,', 'This is a test doctor here.', 'Bahawalnagar', 'Male', 'user');
+(1, 'abc@gmail.com', '12345678', 'Dr. John umoren', 'House # gcuibv e huww  uiwh ', '0345252857', '500', '10 AM to 5 PM', '1,', 'J wjrlwjefk wekhewighe ighuiwhuiw3', '1', 'Male', 'admin'),
+(2, 'doctor1@gmail.com', 'password1', 'Dr. John Njoku', '#434 A city on the high mountain', '08179842529', ' 1500', '10 AM to 5 PM', 'General Medicine,', 'This is a test doctor here.', 'Bahawalnagar', 'Male', 'user'),
+(3, 'doctor@domain.com', '12345678', 'Docker11', '131 Godie street', '09012345678', '1000', '10 AM to 5 PM', 'Cardiology,', 'Some kind of doctor', 'Islamabad', 'Male', 'user');
 
 -- --------------------------------------------------------
 
@@ -156,7 +157,8 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`id`, `name`, `phone`, `email`, `pass`, `sex`) VALUES
-(1, 'jkdhkwd', '123456789', 'abc@abc.com', '12345678', 'male');
+(1, 'jkdhkwd', '123456789', 'abc@abc.com', '12345678', 'male'),
+(2, 'Telemed', '09012345678', 'theorix8@gmail.com', '12345678', 'male');
 
 --
 -- Indexes for dumped tables
@@ -212,7 +214,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `forum`
@@ -224,7 +226,7 @@ ALTER TABLE `forum`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

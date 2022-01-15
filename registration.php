@@ -18,6 +18,7 @@ $special = $_POST['special'];
 			mysqli_query($conn, $sql);
 			session_start(); 
 			$_SESSION['success']="Success";
+			$_SESSION['regName']=$name;
 			header("location:doctor.php");
 }
 
@@ -31,6 +32,7 @@ $sql = "INSERT INTO patients (name,phone,email,pass,sex) VALUES ('$name', '$phon
 			mysqli_query($conn, $sql);
 			session_start(); 
 			$_SESSION['success']="Success";
+			$_SESSION['regName']=$name;
 			header("location:patient.php");
 	
 }

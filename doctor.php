@@ -7,7 +7,7 @@ include("find.php");
 	<div class="row">
 		<div class="col-lg-7">
 				<div class="join-now-doc" >
-				<h3 style="text-align:center;"><?php  if(isset($_SESSION['success'])){ echo "Successfully registered!";};session_unset();?></h3>
+				<h3 style="text-align:center;"><?php  if(isset($_SESSION['success'])){ echo "Successfully registered ".$_SESSION['regName'];};session_unset();?></h3>
 			</div>
 			<div class="join-now-doc">
 				<h3>Join now</h3>
@@ -75,10 +75,10 @@ include("find.php");
 								<label for="exampleSelect1">Select Your Fees</label>						
 								<select class="form-control" class="selectmedtype" id="exampleSelect1" name="fees"  onchange="changemedtype(this);" >
 													<option disabled selected >Select Fee</option>
-													<option value="Rs. 500">Rs. 500</option>
-													<option value="Rs. 1000">Rs. 1000</option>
-													<option value="Rs. 1500">Rs. 1500</option>
-													<option value="Rs. 2000">Rs. 2000</option>
+													<option value="500">N500</option>
+													<option value="1000">N1000</option>
+													<option value="1500">N1500</option>
+													<option value="2000">N2000</option>
 								</select>
 								</div>
 							<div class="form-group">
